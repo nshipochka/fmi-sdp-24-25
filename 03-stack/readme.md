@@ -38,6 +38,7 @@ struct Node {
     Node(const T& data = T(), Node* next = nullptr) : data(data), next(next) {};
 ;}
 
+template <typename T>
 class stack_linked {
 public:
     bool empty() const {
