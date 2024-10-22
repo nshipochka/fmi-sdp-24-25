@@ -38,6 +38,7 @@ struct Node {
     Node(const T& data = T(), Node* next = nullptr) : data(data), next(next) {};
 ;}
 
+template <typename T>
 class stack_linked {
 public:
     bool empty() const {
@@ -45,7 +46,7 @@ public:
     }
 
     void push(const T& element) {
-        m_top = new Node<T>(x, m_top)
+        m_top = new Node<T>(element, m_top)
     }
 
     T pop() {
@@ -72,7 +73,7 @@ public:
 
     // ТРЯБВА да имаме деструктор, понеже заделяме нова памет при всяко добавяне
 private:
-    T* m_top;
+    Node* m_top;
 };
 ```
 
