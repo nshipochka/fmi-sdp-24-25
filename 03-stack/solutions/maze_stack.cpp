@@ -24,18 +24,40 @@ bool is_valid_move(int x, int y, vector<vector<int>>& maze, vector<vector<bool>>
 
 bool solve_maze(vector<vector<int>>& maze, Position start, Position end) {
     vector<vector<bool>> visited(width, vector<bool>(height, false));
-    return solve_maze_rec(start, maze, visited, end);
 
     // TODO: solve with stack
+    stack<Position> s;
+    s.push(start);
+
+    while (!s.empty()) {
+        Position curr = s.top();
+        s.pop();
+
+        if (curr.x == end.x && curr.y == end.y)
+            return true;
+
+        for (int i = 0; i < 4; i++) {
+            int newX = curr.x + dx[i];
+            int newY = curr.y + dy[i];
+
+            // Търсим решение за новата позиция
+            if (is_valid_move(newX, newY, maze, visited)) {
+                s.push(Position(newX, newY));
+                visited[newX][newY] = true;
+            }
+        }
+    }
+
+    return false;
 }
 
 int main() {
     // 0 = път, 1 = стена
     vector<vector<int>> maze = {
         {0, 1, 0, 0, 0},
-        {0, 1, 0, 1, 0},
+        {0, 1, 1, 1, 0},
         {0, 0, 0, 1, 0},
-        {1, 1, 0, 1, 0},
+        {1, 1, 1, 1, 0},
         {0, 0, 0, 0, 0}
     };
 
