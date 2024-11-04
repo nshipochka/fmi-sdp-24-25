@@ -15,8 +15,8 @@ public:
 	CircularQueue<T>& operator=(const CircularQueue<T>& other);
 	~CircularQueue() { delete[] data; }
 
-	bool is_full() const override;
-	bool is_empty() const override;
+	bool full() const override;
+	bool empty() const override;
 
 	void enqueue(const T& element) override;
 	T dequeue() override;
@@ -28,6 +28,9 @@ public:
 		return (end + size - begin) % size;
 	}
 
+	size_t get_size() const {
+		return size;
+	}
 private:
 	T* data;
 	size_t begin, end;

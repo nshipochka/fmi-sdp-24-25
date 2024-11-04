@@ -24,19 +24,19 @@ inline CircularQueue<T>& CircularQueue<T>::operator=(const CircularQueue<T>& oth
 }
 
 template <typename T>
-inline bool CircularQueue<T>::is_full() const {
+inline bool CircularQueue<T>::full() const {
 	return (end + 1) % size == begin;
-	// end сочи къде ще се добавя следващ елемент, винаги е празен???
+	// end сочи къде ще се добавя следващ елемент
 }
 
 template <typename T>
-inline bool CircularQueue<T>::is_empty() const {
+inline bool CircularQueue<T>::empty() const {
 	return begin == end;
 }
 
 template <typename T>
 inline void CircularQueue<T>::enqueue(const T& element) {
-	if(is_full()) 
+	if(full()) 
 		throw std::overflow_error("Queue is full");
 
 	data[end] = element;
@@ -48,7 +48,7 @@ inline void CircularQueue<T>::enqueue(const T& element) {
 
 template <typename T>
 inline T CircularQueue<T>::dequeue() {
-	if(is_empty()) 
+	if(empty()) 
 		throw std::underflow_error("Queue is empty");
 
 	const T& result = data[begin];
@@ -59,7 +59,7 @@ inline T CircularQueue<T>::dequeue() {
 
 template <typename T>
 inline const T& CircularQueue<T>::front() const {
-	if(is_empty()) 
+	if(empty()) 
 		throw std::underflow_error("Queue is empty");
 	
 	return data[begin];
@@ -67,7 +67,7 @@ inline const T& CircularQueue<T>::front() const {
 
 template<typename T>
 inline T& CircularQueue<T>::front() {
-	if (is_empty()) 
+	if (empty()) 
 		throw std::underflow_error("Queue is empty");
 	
 	return data[begin];
