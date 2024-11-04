@@ -27,12 +27,12 @@ inline LinkedQueue<T>::~LinkedQueue() {
 }
 
 template<typename T>
-inline bool LinkedQueue<T>::is_full() const {
+inline bool LinkedQueue<T>::full() const {
 	return false; // Както в автобуса - винаги има място за още един
 }
 
 template<typename T>
-inline bool LinkedQueue<T>::is_empty() const {
+inline bool LinkedQueue<T>::empty() const {
 	return begin == nullptr;
 }
 
@@ -40,7 +40,7 @@ template<typename T>
 inline void LinkedQueue<T>::enqueue(const T& element) {
 	Node<T>* n = new Node<T>(element);
 
-	if (is_empty()) 
+	if (empty()) 
 		begin = n;
 	else 
 		end->next = n;
@@ -64,7 +64,7 @@ inline T LinkedQueue<T>::dequeue() {
 
 template<typename T>
 inline const T& LinkedQueue<T>::front() const {
-	if (is_empty())
+	if (empty())
 		throw std::underflow_error("Stack is empty");
 
 	return begin->data;
@@ -72,7 +72,7 @@ inline const T& LinkedQueue<T>::front() const {
 
 template<typename T>
 inline T& LinkedQueue<T>::front() {
-	if (is_empty())
+	if (empty())
 		throw std::underflow_error("Stack is empty");
 
 	return begin->data;
@@ -80,7 +80,7 @@ inline T& LinkedQueue<T>::front() {
 
 template<typename T>
 inline void LinkedQueue<T>::clear() {
-	while (!is_empty()) {
+	while (!empty()) {
 		Node<T>* temp = begin;
 		begin = begin->next;
 		delete temp;
@@ -89,7 +89,7 @@ inline void LinkedQueue<T>::clear() {
 
 template<typename T>
 inline void LinkedQueue<T>::copy(const Node<T>* start) {
-	assert(begin == nullptr && is_empty());
+	assert(begin == nullptr && empty());
 	while (start) {
 		enqueue(start->data);
 		start = start->next;

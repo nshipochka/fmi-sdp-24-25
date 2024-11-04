@@ -27,8 +27,8 @@ public:
 	LinkedQueue<T>& operator=(const LinkedQueue<T>& other);
 	~LinkedQueue();
 
-	bool is_full() const override;
-	bool is_empty() const override;
+	bool full() const override;
+	bool empty() const override;
 
 	void enqueue(const T& element) override;
 	T dequeue() override;
