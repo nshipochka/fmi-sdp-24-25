@@ -57,8 +57,8 @@ for(std::vector<int>::iterator it = values.begin(); it != values.end(); ++it)
 ### Видове
 | Вид | Операции |
 |---|---|
-| Forward Iterator | Дереференсиране, увеличаване, сравнение |
-| Bidirectional Iterator | Дереференсиране, увеличаване, намаляване, сравнение |
+| Forward Iterator | Дереференциране, увеличаване, сравнение |
+| Bidirectional Iterator | Дереференциране, увеличаване, намаляване, сравнение |
 | Random-access Iterator | Всичко, което указателите позволяват |
 
 # Задачa
