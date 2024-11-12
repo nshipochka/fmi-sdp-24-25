@@ -10,4 +10,5 @@
 По ваше желание, тук ще може да качвате вашия код, ако искате нещо да коментираме по него или имате нужда от помощ.    
 
 [02-stack](https://classroom.github.com/a/hm6q-Yp1)  
-[04-queue](https://classroom.github.com/a/TtCCumFr)  
+[04-queue](https://classroom.github.com/a/TtCCumFr)      
+[06-exam-prep](https://classroom.github.com/a/MBAXOgxK)
