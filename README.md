@@ -12,4 +12,5 @@
 [02-stack](https://classroom.github.com/a/hm6q-Yp1)  
 [04-queue](https://classroom.github.com/a/TtCCumFr)      
 [06-exam-prep](https://classroom.github.com/a/MBAXOgxK)    
-[07-dll](https://classroom.github.com/a/_9TjVYr6)    
+[07-dll](https://classroom.github.com/a/_9TjVYr6)        
+[08-trees](https://classroom.github.com/a/rD9NZrJL)        
