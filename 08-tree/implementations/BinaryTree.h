@@ -31,6 +31,13 @@ public:
     template <typename Function>
     void map(const Function& f);
 
+    void print_in_order() const { print_in_order(root); }
+    void print_pre_order() const { print_pre_order(root); }
+    void print_post_order() const { print_post_order(root); }
+
+    void trim() { trim(root); }
+    void bloom() { bloom(root); };
+
 private:
     static void clear(node* root);
     static node* copy(node* root);
@@ -42,6 +49,13 @@ private:
 
     template <typename Function>
     static void map(const Function& f, node* root);
+
+    void print_in_order(const node* root) const;
+    void print_pre_order(const node* root) const;
+    void print_post_order(const node* root) const;
+
+    void trim(node*& root);
+    void bloom(node* root);
 
 private:
     node* root;
@@ -181,6 +195,66 @@ template <typename T>
 size_t BinaryTree<T>::height(const node* root) {
     if (!root) return 0;
     return 1 + std::max(height(root->left), height(root->right));
+}
+
+template<typename T>
+inline void BinaryTree<T>::print_in_order(const node* root) const {
+    if (!root)
+        return;
+
+    print_in_order(root->left);
+    std::cout << root->data << " ";
+    print_in_order(root->right);
+}
+
+template<typename T>
+inline void BinaryTree<T>::print_pre_order(const node* root) const {
+    if (!root)
+        return;
+
+    std::cout << root->data << " ";
+    print_pre_order(root->left);
+    print_pre_order(root->right);
+}
+
+template<typename T>
+inline void BinaryTree<T>::print_post_order(const node* root) const {
+    if (!root)
+        return;
+
+    print_post_order(root->left);
+    print_post_order(root->right);
+    std::cout << root->data << " ";
+}
+
+template<typename T>
+inline void BinaryTree<T>::trim(node*& root) {
+    if (!root)
+        return;
+
+    if (!root->left && !root->right) {
+        delete root;
+        root = nullptr;
+    }
+    else {
+        trim(root->left);
+        trim(root->right);
+    }
+}
+
+template<typename T>
+inline void BinaryTree<T>::bloom(node* root) {
+    if (!root)
+        return;
+
+    if (!root->left && !root->right) {
+         root->left = new node(root->data);
+         root->right = new node(root->data);
+    }
+    else {
+        bloom(root->left);
+        bloom(root->right);
+    }
 }
 
 template <typename T>

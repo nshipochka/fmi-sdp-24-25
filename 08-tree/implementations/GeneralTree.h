@@ -34,6 +34,21 @@ public:
 	void print() const;
 	void print_by_levels() const;
 
+	int branching_coeff() const { return branching_coeff(root); }
+	
+	void print_level(int level) const {
+		if (level > get_height()) {
+			std::cout << "invalid level";
+			return;
+		}
+
+		print_level(root, level);
+	}
+
+	int leaf_count() const {
+		return leaf_count(root);
+	}
+
 private:
 	static void clear(node* root);
 	static typename GeneralTree<T>::node* copy(node* root);
@@ -45,6 +60,10 @@ private:
 
 	template <typename Function>
 	void map(const Function& f, node* root);
+
+	int branching_coeff(const node* root) const;
+	void print_level(const node* root, int level) const;
+	int leaf_count(const node* root) const;
 
 private:
 	node* root;
@@ -223,6 +242,43 @@ inline void GeneralTree<T>::print_by_levels(const node* root) {
 				q.push(it);
 		}
 	}
+}
+
+template<typename T>
+inline int GeneralTree<T>::branching_coeff(const node* root) const {
+	if (!root)
+		return 0;
+
+	return std::max(
+		1 + branching_coeff(root->sibling),
+			branching_coeff(root->child)
+	);
+}
+
+template<typename T>
+inline void GeneralTree<T>::print_level(const node* root, int level) const {
+	if (!root)
+		return;
+
+	if (level == 0)
+		std::cout << root->data << " ";
+
+	const node* it = root->child;
+	while (it) {
+		print_level(it, level - 1);
+		it = it->sibling;
+	}
+}
+
+template<typename T>
+inline int GeneralTree<T>::leaf_count(const node* root) const {
+	if (!root)
+		return 0;
+
+	if (!root->child)
+		return 1;
+
+	return leaf_count(root->child) + leaf_count(root->sibling);
 }
 
 template<typename T>
