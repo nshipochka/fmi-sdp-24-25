@@ -14,3 +14,4 @@
 [06-exam-prep](https://classroom.github.com/a/MBAXOgxK)    
 [07-dll](https://classroom.github.com/a/_9TjVYr6)        
 [08-trees](https://classroom.github.com/a/rD9NZrJL)        
+[09-bst](https://classroom.github.com/a/bv280dXc)        
