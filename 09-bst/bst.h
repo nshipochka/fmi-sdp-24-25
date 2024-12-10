@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <algorithm>
 
+using std::pair;
+
 template <typename T>
 class BinarySearchTree {
 private:
@@ -11,6 +13,15 @@ private:
 
 		node(const T& key = T(), node* left = nullptr, node* right = nullptr)
 			: key(key), left(left), right(right) {}
+	};
+
+	struct perfect_pair {
+		bool is_perfectly_balanced;
+		size_t weight;
+
+		perfect_pair(bool is_perfectly_balanced = false,
+			size_t weight = 0)
+			: is_perfectly_balanced(is_perfectly_balanced), weight(weight) {}
 	};
 public:
 	BinarySearchTree() : root(nullptr), size(0) {}
@@ -34,10 +45,12 @@ public:
 	bool remove(const T& key) { return remove(root, key); }
 
 	size_t get_size() const { return size; }
-	bool is_balanced() const { return is_balanced(root); }
-	bool is_perfectly_balanced() const { return is_perfectly_balanced(root); }
+	bool is_balanced() const { return is_balanced(root).first; }
+	bool is_perfectly_balanced() const 
+	{ return is_perfectly_balanced(root).first; }
 
 private:
+
 	void clear(node* root);
 	node* copy(node* root);
 
@@ -49,8 +62,8 @@ private:
 	int height(const node* root) const;
 	int weight(const node* root) const;
 
-	bool is_balanced(const node* root) const;
-	bool is_perfectly_balanced(const node* root) const;
+	pair<bool, size_t> is_balanced(const node* root) const;
+	pair<bool, size_t> is_perfectly_balanced(const node* root) const;
 
 private:
 	node* root;
@@ -162,23 +175,38 @@ inline int BinarySearchTree<T>::weight(const node* root) const {
 }
 
 template<typename T>
-inline bool BinarySearchTree<T>::is_balanced(const node* root) const {
+inline pair<bool, size_t> BinarySearchTree<T>::is_balanced(const node* root) const {
 	if (!root)
-		return true;
+		return pair<bool, size_t>(true, 0);
 
-	return is_balanced(root->left) 
-		&& is_balanced(root->right) 
-		&& abs(height(root->left) - height(root->right)) <= 1;
+	pair<bool, size_t> left_pair = is_balanced(root->left);
+	pair<bool, size_t> right_pair = is_balanced(root->right);
+
+	bool is_balanced_node = left_pair.first
+							&& right_pair.first
+							&& abs(left_pair.second - right_pair.second) <= 1;
+
+	size_t curr_height = 1 + std::max(left_pair.second, right_pair.second);
+
+	return pair<bool, size_r>(is_balanced_node, curr_height);
 }
 
 template<typename T>
-inline bool BinarySearchTree<T>::is_perfectly_balanced(const node* root) const {
+inline pair<bool, size_t> BinarySearchTree<T>::is_perfectly_balanced(const node* root) const {
 	if (!root)
-		return true;
+		return pair<bool, size_t>(true, 0);
 
-	return is_perfectly_balanced(root->left)
-		&& is_perfectly_balanced(root->right)
-		&& abs(weight(root->left) - weight(root->right)) <= 1;
+
+	pair<bool, size_t> left_pair = is_perfectly_balanced(root->left);
+	pair<bool, size_t> right_pair = is_perfectly_balanced(root->right);
+
+	bool is_balanced_node = left_pair.first
+		&& right_pair.first
+		&& abs(left_pair.second - right_pair.second) <= 1;
+
+	size_t curr_weight = 1 + left_pair.second + right_pair.second;
+
+	return pair<bool, size_t>(is_balanced_node, curr_weight);
 }
 
 
