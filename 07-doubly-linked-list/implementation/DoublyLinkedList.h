@@ -50,4 +50,5 @@ private:
 };
 
 #include "DoublyLinkedList.inl"
+#include "iterator.inl"
 
