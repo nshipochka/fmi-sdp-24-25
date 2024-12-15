@@ -244,15 +244,20 @@ inline void GeneralTree<T>::print_by_levels(const node* root) {
 	}
 }
 
+// Решение, предложено от @MartinStanchev1 
 template<typename T>
 inline int GeneralTree<T>::branching_coeff(const node* root) const {
 	if (!root)
 		return 0;
-
-	return std::max(
-		1 + branching_coeff(root->sibling),
-			branching_coeff(root->child)
-	);
+	
+	int root_coeff = 0;
+	node* curr_child = root->child;
+	while (curr_child) {
+		++root_coeff;
+		curr_child = curr_child->sibling;
+	}
+	
+	return std::max({ rootCoeff, branching_coeff(root->child), branching_coeff(root->sibling) });
 }
 
 template<typename T>
@@ -276,7 +281,7 @@ inline int GeneralTree<T>::leaf_count(const node* root) const {
 		return 0;
 
 	if (!root->child)
-		return 1;
+		return 1 + leaf_count(root->sibling);
 
 	return leaf_count(root->child) + leaf_count(root->sibling);
 }
