@@ -15,3 +15,4 @@
 [07-dll](https://classroom.github.com/a/_9TjVYr6)        
 [08-trees](https://classroom.github.com/a/rD9NZrJL)        
 [09-bst](https://classroom.github.com/a/bv280dXc)        
+[10-dictionary](https://classroom.github.com/a/9f_emLV0)        
