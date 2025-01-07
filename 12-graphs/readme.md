@@ -197,7 +197,7 @@ public:
 };
 ```
 
-### Сложност на операциите
+### [Сложност на операциите](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))
 
 | Операция                                   | Adjacency List | Adjacency Matrix | Incidence Matrix |
 |-------------------------------------------|--------------------|----------------------|-------------------------|
